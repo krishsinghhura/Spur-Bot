@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 220 20% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 10%;
+
+    --primary: 174 72% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 15% 95%;
+    --secondary-foreground: 220 15% 30%;
+
+    --muted: 210 15% 92%;
+    --muted-foreground: 220 10% 50%;
+
+    --accent: 174 60% 94%;
+    --accent-foreground: 174 72% 25%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 20% 88%;
+    --input: 214 20% 88%;
+    --ring: 174 72% 40%;
+
+    --radius: 0.75rem;
+
+    /* Chat specific tokens */
+    --chat-user-bubble: 174 72% 40%;
+    --chat-user-bubble-foreground: 0 0% 100%;
+    --chat-ai-bubble: 210 15% 95%;
+    --chat-ai-bubble-foreground: 220 20% 15%;
+    --chat-timestamp: 220 10% 60%;
+    --chat-typing: 174 50% 45%;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(220 20% 10% / 0.03);
+    --shadow-md: 0 4px 6px -1px hsl(220 20% 10% / 0.07), 0 2px 4px -2px hsl(220 20% 10% / 0.05);
+    --shadow-lg: 0 10px 15px -3px hsl(220 20% 10% / 0.08), 0 4px 6px -4px hsl(220 20% 10% / 0.05);
+    --shadow-xl: 0 20px 25px -5px hsl(220 20% 10% / 0.1), 0 8px 10px -6px hsl(220 20% 10% / 0.05);
+
+    /* Footer */
+    --footer-bg: 210 15% 96%;
+    --footer-text: 220 10% 50%;
+    --footer-link: 174 72% 35%;
+  }
+
+  .dark {
+    --background: 220 20% 8%;
+    --foreground: 210 20% 98%;
+
+    --card: 220 18% 12%;
+    --card-foreground: 210 20% 98%;
+
+    --popover: 220 18% 12%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 174 65% 50%;
+    --primary-foreground: 220 20% 8%;
+
+    --secondary: 220 15% 18%;
+    --secondary-foreground: 210 15% 85%;
+
+    --muted: 220 15% 20%;
+    --muted-foreground: 210 10% 60%;
+
+    --accent: 174 40% 20%;
+    --accent-foreground: 174 65% 70%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 22%;
+    --input: 220 15% 22%;
+    --ring: 174 65% 50%;
+
+    --chat-user-bubble: 174 65% 45%;
+    --chat-user-bubble-foreground: 0 0% 100%;
+    --chat-ai-bubble: 220 15% 18%;
+    --chat-ai-bubble-foreground: 210 15% 90%;
+    --chat-timestamp: 210 10% 55%;
+    --chat-typing: 174 55% 55%;
+
+    --footer-bg: 220 18% 10%;
+    --footer-text: 210 10% 55%;
+    --footer-link: 174 65% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .chat-shadow {
+    box-shadow: var(--shadow-xl);
+  }
+
+  .message-shadow {
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+@layer components {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted)) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--muted));
+    border-radius: 3px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--muted-foreground) / 0.3);
+  }
+}
+
+/* Message animations */
+@keyframes message-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes typing-dot {
+  0%, 60%, 100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+}
+
+.animate-message-in {
+  animation: message-in 0.25s ease-out forwards;
+}
+
+.typing-dot {
+  animation: typing-dot 1.4s ease-in-out infinite;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
